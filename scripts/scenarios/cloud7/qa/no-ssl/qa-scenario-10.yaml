@@ -5,17 +5,17 @@ proposals:
   deployment:
     elements:
       database-server:
-      - controller
+      - "@@controller@@"
 - barclamp: rabbitmq
   deployment:
     elements:
       rabbitmq-server:
-      - controller
+      - "@@controller@@"
 - barclamp: keystone
   deployment:
     elements:
       keystone-server:
-      - controller
+      - "@@controller@@"
 
 - barclamp: swift
   attributes:
@@ -24,9 +24,9 @@ proposals:
     elements:
       swift-dispersion: []
       swift-proxy:
-      - controller
+      - "@@controller@@"
       swift-ring-compute:
-      - controller
+      - "@@controller@@"
       swift-storage:
       - "@@storage-swift1@@"
       - "@@storage-swift2@@"
@@ -37,7 +37,7 @@ proposals:
   deployment:
     elements:
       glance-server:
-      - controller
+      - "@@controller@@"
 - barclamp: cinder
   attributes:
     volumes:
@@ -49,9 +49,9 @@ proposals:
   deployment:
     elements:
       cinder-controller:
-      - controller
+      - "@@controller@@"
       cinder-volume:
-      - other
+      - "@@other@@"
 - barclamp: neutron
   attributes:
     ml2_mechanism_drivers:
@@ -63,9 +63,9 @@ proposals:
   deployment:
     elements:
       neutron-server:
-      - controller
+      - "@@controller@@"
       neutron-network:
-      - controller
+      - "@@controller@@"
 - barclamp: nova
   attributes:
     itxt_instance: ''
@@ -79,7 +79,7 @@ proposals:
   deployment:
     elements:
       nova-controller:
-      - controller
+      - "@@controller@@"
       nova-compute-hyperv: []
       nova-compute-kvm:
       - "@@compute-kvm1@@"
@@ -92,13 +92,13 @@ proposals:
   deployment:
     elements:
       horizon-server:
-      - controller
+      - "@@controller@@"
 - barclamp: heat
   attributes:
   deployment:
     elements:
       heat-server:
-      - controller
+      - "@@controller@@"
 - barclamp: ceilometer
   attributes:
   deployment:
@@ -109,14 +109,14 @@ proposals:
       - "@@compute-kvm3@@"
       ceilometer-agent-hyperv: []
       ceilometer-central:
-      - controller
+      - "@@controller@@"
       ceilometer-server:
-      - controller
+      - "@@controller@@"
       ceilometer-swift-proxy-middleware:
-      - controller
+      - "@@controller@@"
 - barclamp: tempest
   attributes:
   deployment:
     elements:
       tempest:
-      - controller
+      - "@@controller@@"
