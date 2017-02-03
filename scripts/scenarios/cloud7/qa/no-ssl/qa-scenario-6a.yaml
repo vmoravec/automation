@@ -189,7 +189,7 @@ proposals:
   deployment:
     elements:
       magnum-server:
-      - "@@controller1@@" #TODO Cluster will be enabled when implementation done cluster - cluster:services
+      - cluster:services
 
 - barclamp: tempest
   attributes:
