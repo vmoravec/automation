@@ -1,0 +1,25 @@
+name: basic
+nodes: 7
+barclamps:
+  exclude:
+    - manila
+    - updater
+ha:
+  clusters:
+    - services:
+      nodes: 2
+      stonith: ipmi_barclamp
+
+    - data:
+      nodes: 2
+      stonith: sbd
+
+# proposals:
+# - pacemaker:
+#     clusters:
+#       - services
+#   database:
+#     cluster: services
+#   rabbitmq:
+#     cluster: services
+

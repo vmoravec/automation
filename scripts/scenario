@@ -1,0 +1,48 @@
+#!/usr/env ruby
+
+require "optparse"
+require "ostruct"
+require "tmpdir"
+require "tempfile"
+
+options = OpenStruct.new
+
+OptionParser.new do |o|
+  o.on("--test TEST_NAME") {|test|    options.test = test       }
+  o.on("--user USER")      {|user|    options.user = user       }
+  o.on("--branch BRANCH")  {|branch|  options.branch = branch   }
+  o.on("--crowbar CROWBAR"){|crowbar| options.crowbar = crowbar }
+  o.on('--help')           { puts o; exit }
+  o.parse!
+end
+
+abort("Crowbar IP not specified") unless options.crowbar
+abort("Test name not specified")  unless options.test
+
+options.user   = GITHUB_USER unless options.user
+options.branch = GIT_BRANCH unless options.branch
+options.repo   = "https://github.com/#{options.user}/cct.git"
+
+Dir.mktmpdir("cct-ui-test-") do |tmpdir|
+  Dir.chdir(tmpdir)
+
+  puts "Going to clone cct repo and run tests in #{`pwd`}"
+
+  system "git clone -b #{options.branch} #{options.repo}"
+  Dir.chdir(File.join(tmpdir, "cct"))
+  system "ln -s #{REMOTE_VENDOR_DIR} vendor"
+  system "bundle install --local"
+  success = system(
+    "bundle exec rake #{options.test} " +
+    "cct_config='{\"admin_node\": {\"ip\": \"#{options.crowbar}\"}}'"
+  )
+
+  if success
+    puts "\nSUCCESS"
+  else
+    puts "\nFAILED"
+  end
+end
+
+#http://stackoverflow.com/questions/4565700/specify-private-ssh-key-to-use-when-executing-shell-command-with-or-without-ruby
+
