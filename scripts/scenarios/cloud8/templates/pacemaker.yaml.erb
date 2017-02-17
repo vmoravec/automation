@@ -1,0 +1,32 @@
+<%- @clusters.each do |cluster| %>
+barclamp: pacemaker
+  name: <%= cluster.name %>
+  attributes:
+    stonith:
+      mode: <%= cluster.stonith_mode %>
+      sbd:
+        nodes:
+        <%- cluster.nodes.each do |node| %>
+        "@@<%= node.alias %>@@":
+        devices:
+          - "<%= node.device %>"
+        <% end %>
+      per_node:
+        nodes:
+        <%- cluster.nodes.each do |node| %>
+          "@@<%= node.alias %>@@":
+            params: ''
+        <% end %>
+
+  deployment:
+    elements:
+      pacemaker-cluster-member:
+      <%- cluster.nodes.each do |node| %>
+      - "@@<%= node.alias %>@@"
+      <% end %>
+      hawk-server:
+      <%- cluster.nodes.each do |node| %>
+      - "@@<%= node.alias %>@@"
+      <% end %>
+
+<% end %>

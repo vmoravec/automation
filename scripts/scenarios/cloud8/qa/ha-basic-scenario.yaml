@@ -1,0 +1,32 @@
+name: ha-basic
+nodes: 7
+clusters:
+- name: services
+  nodes: 2
+  stonith_mode: ipmi_barclamp
+- name: data
+  nodes: 2
+  stonith: sbd
+
+barclamps:
+  exclude:
+  - manila
+  - updater
+
+params:
+  nfs-server: 10.162.66.1
+
+database:
+  storage_mode: drbd
+
+database:
+  storage_mode: nfs
+
+keystone:
+  token: uuid
+
+ceph:
+  nodes: 3
+
+nova:
+  nodes: 2

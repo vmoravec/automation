@@ -5,6 +5,13 @@ require "ostruct"
 require "tmpdir"
 require "tempfile"
 
+# Examples
+#
+# soc generate scenario ha-basic --use /path/to/modified/ha-basic --exclude swift,ceph
+# soc generate scenario ha-ceph --exclude swift
+# soc generate scenario ha-magnum --include ceph
+# soc generate scenario ha-magnum --include ceph --ssl --file ha-magnum.yaml
+
 options = OpenStruct.new
 
 OptionParser.new do |o|
@@ -15,6 +22,8 @@ OptionParser.new do |o|
   o.on('--help')           { puts o; exit }
   o.parse!
 end
+
+
 
 abort("Crowbar IP not specified") unless options.crowbar
 abort("Test name not specified")  unless options.test
