@@ -52,8 +52,8 @@
           description: Mandatory, IP of iscsi target for sbd
 
       - string:
-        name: kvm-compute-nodes
-          default: 1
+          name: kvm-compute-nodes
+          default: "1"
           description: Mandatory, set other number of kvm compute nodes
 
       - string:
