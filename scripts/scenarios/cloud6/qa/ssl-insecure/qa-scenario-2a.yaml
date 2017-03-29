@@ -250,6 +250,28 @@ proposals:
       heat-server:
       - cluster:services
 
+- barclamp: manila
+  attributes:
+    default_share_type: default
+    shares:
+    - backend_driver: netapp
+      backend_name: netapp1
+      netapp:
+        netapp_storage_family: ontap_cluster
+        netapp_server_hostname: ##netapp_server##
+        netapp_server_port: 80
+        netapp_login: admin
+        netapp_password: ##netapp_password##
+        netapp_vserver: ##netapp_vserver##
+        netapp_transport_type: http
+  deployment:
+    elements:
+      manila-server:
+      - cluster:services
+      manila-share:
+      - "@@data1@@"
+      - "@@data2@@"
+
 - barclamp: ceilometer
   attributes:
   deployment:
