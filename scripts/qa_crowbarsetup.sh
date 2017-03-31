@@ -4571,9 +4571,9 @@ function heat_stack_create
     local stack_name=$1
     local description=$2
     local file="-f $3"
-    local params=$4
+    local params="$4"
     heat stack-create $stack_name $file $params
-    wait_for 15 20 "heat stack-list | grep $stack_name | grep CREATE_COMPLETE" "$description"
+    wait_for 15 20 'heat stack-list | grep $stack_name | grep CREATE_COMPLETE' "$description"
 }
 
 function heat_stack_delete
@@ -4581,7 +4581,7 @@ function heat_stack_delete
     local stack_name=$1
     local description=$2
     openstack stack delete --yes $stack_name
-    wait_for 15 20 "! heat stack-show $stack_name" $description
+    wait_for 15 20 "! heat stack-show $stack_name" "$description"
 }
 
 
