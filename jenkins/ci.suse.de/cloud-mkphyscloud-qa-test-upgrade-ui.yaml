@@ -75,6 +75,16 @@
           mkdir -p $artifacts_dir
           touch $artifacts_dir/.ignore
 
+          ## This should be happening on the controller
+          ssh root@admin "
+          "' getnovacontroller
+          params="--parameters"
+          params="$params east_net_cidr=44.0.1.0/27;east_net_pool_start=44.0.1.10;east_net_pool_end=44.0.1.20"
+          params="$params;west_net_cidr=44.0.2.0/27;west_net_pool_start=44.0.2.10;west_net_pool_end=44.0.2.20"
+
+          heat_stack_create upgrade_test "heat stack for upgrade tests to complete" /root/scripts/heat/2-instances-cinder.yaml "$params"
+          '
+
           ssh root@$admin "
             export cloud=$cloud;
             export upgrade_cloudsource=$upgrade_cloudsource
