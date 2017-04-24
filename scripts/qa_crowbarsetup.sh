@@ -5001,6 +5001,8 @@ function onadmin_prepare_cloudupgrade_nodes_repos_6_to_7
     # prepare installation repositories for nodes
     onadmin_prepare_sles12sp2_repos
     onadmin_prepare_sles12plus_cloud_repos
+    addsles12sp2testupdates
+    addcloud7testupdates
 
     if [[ $hacloud = 1 ]]; then
         add_ha12sp2_repo
