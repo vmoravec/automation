@@ -74,14 +74,18 @@ proposals:
       - @@ceph1@@
       - @@ceph2@@
       - @@ceph3@@
+      - @@ceph4@@
+      - @@ceph5@@
       ceph-osd:
       - @@ceph1@@
       - @@ceph2@@
       - @@ceph3@@
+      - @@ceph4@@
+      - @@ceph5@@
       ceph-radosgw:
       - @@ceph1@@
       ceph-mds:
-      - @@compute2@@
+      - @@controller1@@
 
 - barclamp: glance
   attributes:
@@ -145,8 +149,6 @@ proposals:
       - cluster:services
       nova-compute-hyperv: []
       nova-compute-kvm:
-      - @@compute1@@
-      - @@compute2@@
       nova-compute-qemu: []
       nova-compute-xen: []
 
@@ -161,19 +163,6 @@ proposals:
     elements:
       heat-server:
       - cluster:services
-
-- barclamp: ceilometer
-  deployment:
-    elements:
-      ceilometer-agent:
-      - @@compute1@@
-      - @@compute2@@
-      ceilometer-agent-hyperv: []
-      ceilometer-central:
-      - cluster:services
-      ceilometer-server:
-      - cluster:services
-      ceilometer-swift-proxy-middleware: []
 
 - barclamp: manila
   attributes:
